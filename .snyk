@@ -1,0 +1,4 @@
+ignore:
+  SNYK-CC-AWS-426:
+    - '*':
+        reason: No EC2 termination prevention is needed
