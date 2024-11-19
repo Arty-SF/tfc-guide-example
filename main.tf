@@ -30,7 +30,7 @@ resource "aws_instance" "ubuntu" {
   }
 
   metadata_options {
-    http_tokens = "required"
+    http_tokens = "enabled" # not "required"
   }
 
   tags = {
