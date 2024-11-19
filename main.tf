@@ -30,7 +30,9 @@ resource "aws_instance" "ubuntu" {
   }
 
   metadata_options {
-    http_tokens = "enabled" # not "required"
+    # Issue in TF, requires explicit value, @see https://github.com/hashicorp/terraform-provider-aws/issues/16781
+    http_endpoint = "enabled"
+    http_tokens = "required"
   }
 
   tags = {
