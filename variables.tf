@@ -18,6 +18,6 @@ variable "instance_name" {
 
 variable "common_tags" {
   description = "Tags applicable to all resources"
-  type = map(string)
-  default = {}
+  type        = map(string)
+  default     = {}
 }

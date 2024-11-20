@@ -57,7 +57,7 @@ resource "aws_instance" "ec2_instance" {
   }
 
   tags = {
-    Name = var.instance_name
+    Name                      = var.instance_name
     "ci:git_commit"           = "238ac00fe8126b1cae8917717ff6b24f6ee77aa6"
     "ci:git_file"             = "main.tf"
     "ci:git_last_modified_at" = "2024-11-20 04:15:48"
