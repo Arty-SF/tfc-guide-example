@@ -1,16 +1,28 @@
 # Copyright (c) HashiCorp, Inc.
 # SPDX-License-Identifier: MPL-2.0
 
+terraform {
+  cloud {
+    organization = "artysf-org"
+    hostname = "app.terraform.io"
+
+    workspaces {
+      name = "tfc-guide-example"
+      project = "tfc-guide-example"
+    }
+  }
+}
+
 provider "aws" {
   region = var.region
 }
 
-data "aws_ami" "ubuntu" {
+data "aws_ami" "ec2_ami" {
   most_recent = true
 
   filter {
     name   = "name"
-    values = ["ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-*"]
+    values = ["al2023-ami-2023.6.*"]
   }
 
   filter {
@@ -18,11 +30,16 @@ data "aws_ami" "ubuntu" {
     values = ["hvm"]
   }
 
-  owners = ["099720109477"] # Canonical
+  filter {
+    name   = "architecture"
+    values = ["arm64"]
+  }
+
+  owners = ["amazon"] # Canonical
 }
 
-resource "aws_instance" "ubuntu" {
-  ami           = data.aws_ami.ubuntu.id
+resource "aws_instance" "ec2_instance" {
+  ami           = data.aws_ami.ec2_ami.id
   instance_type = var.instance_type
 
   root_block_device {
