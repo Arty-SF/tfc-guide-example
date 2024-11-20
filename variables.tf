@@ -16,3 +16,8 @@ variable "instance_name" {
   default     = "Provisioned by Terraform"
 }
 
+variable "common_tags" {
+  description = "Tags applicable to all resources"
+  type = map(string)
+  default = {}
+}

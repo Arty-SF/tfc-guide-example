@@ -15,6 +15,10 @@ terraform {
 
 provider "aws" {
   region = var.region
+
+  default_tags {
+    tags = local.tags
+  }
 }
 
 data "aws_ami" "ec2_ami" {
@@ -35,7 +39,7 @@ data "aws_ami" "ec2_ami" {
     values = ["arm64"]
   }
 
-  owners = ["amazon"] # Canonical
+  owners = ["amazon"]
 }
 
 resource "aws_instance" "ec2_instance" {
@@ -62,6 +66,5 @@ resource "aws_instance" "ec2_instance" {
     "ci:temporary-flag"       = "true"
     "ci:yor_name"             = "ec2_instance"
     "ci:yor_trace"            = "f315200b-8017-4b63-a537-2556af55246c"
-    group-name                = "tfc-guide-workshop"
   }
 }
