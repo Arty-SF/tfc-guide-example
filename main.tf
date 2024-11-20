@@ -4,10 +4,10 @@
 terraform {
   cloud {
     organization = "artysf-org"
-    hostname = "app.terraform.io"
+    hostname     = "app.terraform.io"
 
     workspaces {
-      name = "tfc-guide-example"
+      name    = "tfc-guide-example"
       project = "tfc-guide-example"
     }
   }
@@ -49,7 +49,7 @@ resource "aws_instance" "ec2_instance" {
   metadata_options {
     # Issue in TF, requires explicit value, @see https://github.com/hashicorp/terraform-provider-aws/issues/16781
     http_endpoint = "enabled"
-    http_tokens = "required"
+    http_tokens   = "required"
   }
 
   tags = {
