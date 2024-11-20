@@ -1,0 +1,7 @@
+tag_groups:
+  # https://github.com/bridgecrewio/yor/blob/main/docs/3.Custom%20Taggers/Custom_tagger_YAML.md
+  - name: project-tags
+    tags:
+      - name: 'ci:temporary-flag'
+        value:
+          default: true
