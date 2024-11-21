@@ -1,6 +1,7 @@
 #!make
 
-$(VERBOSE).SILENT:
+# $(VERBOSE).SILENT:
+.ONESHELL:
 
 DEV_ENV := dev
 GROUP_NAME := default
@@ -20,30 +21,21 @@ ifdef TFC_GROUP_NAME
 endif
 
 define hcp_api_list_vars
-	curl \
+	$(1) := $(shell curl \
 	  --get \
 	  --header "Authorization: Bearer ${HCP_API_TOKEN}" \
   	  --header "Content-Type: application/vnd.api+json" \
   	  --data-urlencode "filter[organization][name]=artysf-org" \
   	  --data-urlencode "filter[workspace][name]=tfc-guide-example" \
-	  "https://app.terraform.io/api/v2/vars" 2>/dev/null | jq '.'
+	  "https://app.terraform.io/api/v2/vars" 2>/dev/null | jq '.' )
 endef
 
 # @see https://jqplay.org/s/LZzPUNZ9WaRKZIL
+# @see https://www.gnu.org/software/make/manual/html_node/Eval-Function.html#Eval-Function
 define hcp_api_update_aws_credentials
-$(eval CLOUD_VARS=`$(hcp_api_list_vars)`)
-$(shell echo $(CLOUD_VARS) | \
-	jq '(.data[] | select(.attributes.key == "AWS_ACCESS_KEY_ID") as $$d | $$d.id)' -r | \
-	xargs -I '{}' sed -ri 's/^(AWS_ACCESS_KEY_ID_VAR_ID).*/\1={}/g' .env \
-)
-$(shell echo $(CLOUD_VARS) | \
-	jq '(.data[] | select(.attributes.key == "AWS_SECRET_ACCESS_KEY") as $$d | $$d.id)' -r | \
-	xargs -I '{}' sed -ri 's/^(AWS_SECRET_ACCESS_KEY_VAR_ID).*/\1={}/g' .env \
-)
-$(shell echo $(CLOUD_VARS) | \
-	jq '(.data[] | select(.attributes.key == "AWS_SESSION_TOKEN") as $$d | $$d.id)' -r | \
-	xargs -I '{}' sed -ri 's/^(AWS_SESSION_TOKEN_VAR_ID).*/\1={}/g' .env \
-)
+	$(eval $(call hcp_api_list_vars,CLOUD_VARS))
+
+	$(shell (echo "${CLOUD_VARS}" ) > test.txt )
 endef
 
 YOR_COST_ALLOCATION_TAGS := '{ "group-name" : "$(GROUP_NAME)" }'
@@ -68,11 +60,10 @@ hcp-api-list-vars: ## List variables in HCP Cloud
 
 ## Update AWS access token variables in HCP Cloud
 setup: ## Initialize project locally
-	# terraform init
 	[ -e '.env' ] || cp '.env.example' '.env'
 ifeq ($(HCP_API_TOKEN),)
 	@echo Warning: HCP_API_TOKEN isn\'t defined\; continue? [Type token value/n]
 	@read -r line; if [ $$line = "n" ]; then echo aborting; exit 1 ; else echo $$line | xargs -I '{}' sed -ri 's/^(HCP_API_TOKEN).*/\1={}/g' .env ; fi
 	$(source .env)
 endif
-	@$(hcp_api_update_aws_credentials)
+	$(hcp_api_update_aws_credentials)
