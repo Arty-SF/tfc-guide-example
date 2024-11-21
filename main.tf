@@ -66,5 +66,6 @@ resource "aws_instance" "ec2_instance" {
     "ci:temporary-flag"       = "true"
     "ci:yor_name"             = "ec2_instance"
     "ci:yor_trace"            = "f315200b-8017-4b63-a537-2556af55246c"
+    group-name                = "tfc-guide-workshop"
   }
 }
