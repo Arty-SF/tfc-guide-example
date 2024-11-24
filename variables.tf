@@ -28,3 +28,9 @@ variable "dynamic_tags" {
   type        = map(string)
   default     = {}
 }
+
+variable "variables_set_a" {
+  description = "A test variable for the variables set - A"
+  type        = string
+  default     = "A VS var A"
+}
