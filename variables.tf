@@ -32,5 +32,5 @@ variable "dynamic_tags" {
 variable "variables_set_a" {
   description = "A test variable for the variables set - A"
   type        = string
-  default     = 'A VS var A'
+  default     = "A VS var A"
 }
