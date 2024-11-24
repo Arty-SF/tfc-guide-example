@@ -58,13 +58,14 @@ resource "aws_instance" "ec2_instance" {
 
   tags = {
     Name                      = var.instance_name
-    "ci:git_commit"           = "238ac00fe8126b1cae8917717ff6b24f6ee77aa6"
-    "ci:git_file"             = "main.tf"
-    "ci:git_last_modified_at" = "2024-11-20 04:15:48"
-    "ci:git_org"              = "Arty-SF"
-    "ci:git_repo"             = "tfc-guide-example"
-    "ci:temporary-flag"       = "true"
-    "ci:yor_name"             = "ec2_instance"
-    "ci:yor_trace"            = "f315200b-8017-4b63-a537-2556af55246c"
+    #    "ci:git_commit"           = "238ac00fe8126b1cae8917717ff6b24f6ee77aa6"
+    #    "ci:git_file"             = "main.tf"
+    #    "ci:git_last_modified_at" = "2024-11-20 04:15:48"
+    #    "ci:git_org"              = "Arty-SF"
+    #    "ci:git_repo"             = "tfc-guide-example"
+    #    "ci:temporary-flag"       = "true"
+    #    "ci:yor_name"             = "ec2_instance"
+    #    "ci:yor_trace"            = "f315200b-8017-4b63-a537-2556af55246c"
+    #    group-name                = "tfc-guide-workshop"
   }
 }
