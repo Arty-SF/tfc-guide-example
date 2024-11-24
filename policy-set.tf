@@ -1,3 +1,5 @@
+# @see https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/policy_set
+
 data "tfe_slug" "this" {
   source_path = "policies/training-policy-set"
 }
