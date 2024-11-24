@@ -1,5 +1,3 @@
 locals {
-  tags = merge({
-    temporary-flag = "true"
-  }, var.common_tags)
+  tags = merge(var.static_tags, var.dynamic_tags)
 }

@@ -16,8 +16,15 @@ variable "instance_name" {
   default     = "Provisioned by Terraform"
 }
 
-variable "common_tags" {
-  description = "Tags applicable to all resources"
+variable "static_tags" {
+  description = "Tags applicable to all resources specific and defined independently to the target environment"
+  type        = map(string)
+  default     = {}
+}
+
+
+variable "dynamic_tags" {
+  description = "Tags applicable to all resources but specific for a target environment only"
   type        = map(string)
   default     = {}
 }
