@@ -1,3 +1,4 @@
+# @see https://github.com/snyk/actions
 # @see https://docs.snyk.io/scm-ide-and-ci-cd-integrations/snyk-ci-cd-integrations/github-actions-for-snyk-setup-and-checking-for-vulnerabilities/snyk-infrastructure-as-code-action
 name: Snyk Infrastructure as Code check
 on:
