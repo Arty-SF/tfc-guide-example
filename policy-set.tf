@@ -7,6 +7,12 @@ data "tfe_policy_set" "this" {
   organization = "artysf-org"
 }
 
+resource "tfe_workspace" "this" {
+  name         = "tfc-guide-example"
+  organization = "artysf-org"
+  project      = "tfc-guide-example"
+}
+
 import {
   to = tfe_policy_set.this
   id = data.tfe_policy_set.this.id
@@ -20,6 +26,7 @@ resource "tfe_policy_set" "this" {
   agent_enabled       = true
   policy_tool_version = "latest"
   overridable         = true
+  workspace_ids       = [tfe_workspace.this.id]
 
   // reference the tfe_slug data source.
   slug = data.tfe_slug.this
