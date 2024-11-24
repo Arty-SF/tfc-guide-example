@@ -27,9 +27,7 @@ provider "aws" {
   region = var.region
 
   default_tags {
-    tags = merge({
-      external-commit-sha: data.external.git-commit-sha
-    }, local.tags)
+    tags = local.tags
   }
 }
 
