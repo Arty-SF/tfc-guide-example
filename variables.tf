@@ -3,16 +3,19 @@
 
 variable "region" {
   description = "AWS region"
+  type        = string
   default     = "us-east-1"
 }
 
 variable "instance_type" {
   description = "Type of EC2 instance to provision"
+  type        = string
   default     = "t4g.nano"
 }
 
 variable "instance_name" {
   description = "EC2 instance name"
+  type        = string
   default     = "Provisioned by Terraform"
 }
 
@@ -29,6 +32,7 @@ variable "dynamic_tags" {
   default     = {}
 }
 
+# tflint-ignore: terraform_unused_declarations
 variable "variables_set_a" {
   description = "A test variable for the variables set - A"
   type        = string
