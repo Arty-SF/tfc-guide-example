@@ -13,15 +13,6 @@ terraform {
   }
 }
 
-data "external" "git-commit-sha" {
-  program = [
-    "git",
-    "log",
-    "--pretty=format:{ \"sha\": \"%H\" }",
-    "-1",
-    "HEAD"
-  ]
-}
 
 provider "aws" {
   region = var.region
