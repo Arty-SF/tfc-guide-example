@@ -13,13 +13,30 @@ terraform {
   }
 }
 
+data "external" "git-commit-sha" {
+  program = [
+    "git",
+    "log",
+    "--pretty=format:{ \"sha\": \"%H\" }",
+    "-1",
+    "HEAD"
+  ]
+}
+
 provider "aws" {
   region = var.region
 
   default_tags {
-    tags = local.tags
+    tags = merge({
+      external-commit-sha: data.external.git-commit-sha
+    }, local.tags)
   }
 }
+
+# @see https://github.com/metio/terraform-provider-git/
+#provider "git" {
+#  # requires no configuration
+#}
 
 data "aws_ami" "ec2_ami" {
   most_recent = true
