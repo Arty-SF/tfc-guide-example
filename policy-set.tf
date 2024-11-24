@@ -10,7 +10,6 @@ data "tfe_policy_set" "this" {
 resource "tfe_workspace" "this" {
   name         = "tfc-guide-example"
   organization = "artysf-org"
-  project      = "tfc-guide-example"
 }
 
 import {
