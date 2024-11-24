@@ -31,3 +31,5 @@ override.tf.json
 
 .env*
 !.env.example
+
+a3s
