@@ -13,6 +13,7 @@ terraform {
   }
 }
 
+
 provider "aws" {
   region = var.region
 
@@ -20,6 +21,11 @@ provider "aws" {
     tags = local.tags
   }
 }
+
+# @see https://github.com/metio/terraform-provider-git/
+#provider "git" {
+#  # requires no configuration
+#}
 
 data "aws_ami" "ec2_ami" {
   most_recent = true

@@ -34,3 +34,19 @@ variable "variables_set_a" {
   type        = string
   default     = "A VS var A"
 }
+
+variable "TFC_CONFIGURATION_VERSION_GIT_COMMIT_SHA" {
+  type = string
+}
+
+variable "TFC_CONFIGURATION_VERSION_GIT_TAG" {
+  type = string
+}
+
+variable "TFC_CONFIGURATION_VERSION_GIT_BRANCH" {
+  type = string
+}
+
+variable "TFC_RUN_ID" {
+  type = string
+}
