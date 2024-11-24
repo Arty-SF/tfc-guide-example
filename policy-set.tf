@@ -14,6 +14,11 @@
 #  slug = data.tfe_slug.this
 #}
 
+provider "tfe" {
+  token        = var.tfe-token
+  organization = "artysf-org"
+}
+
 resource "tfe_policy" "test" {
   name         = "training-policy-set"
   description  = "https://hashicorp-terraform.awsworkshop.io/060_sentinel/6-policy-quickstart.html"

@@ -7,6 +7,12 @@ variable "region" {
   default     = "us-east-1"
 }
 
+variable "tfe-token" {
+  description = "TFE Token"
+  type        = string
+  default     = ""
+}
+
 variable "instance_type" {
   description = "Type of EC2 instance to provision"
   type        = string
