@@ -1,0 +1,18 @@
+# @see https://docs.snyk.io/scm-ide-and-ci-cd-integrations/snyk-ci-cd-integrations/github-actions-for-snyk-setup-and-checking-for-vulnerabilities/snyk-infrastructure-as-code-action
+name: Snyk Infrastructure as Code check
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+jobs:
+  security:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Run Snyk to check terraform files
+        uses: snyk/actions/iac@master
+        env:
+          # snyk config get api
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          args: --report --scan=resource-changes
