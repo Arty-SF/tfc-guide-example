@@ -5,20 +5,20 @@ provider "tfe" {
   organization = "artysf-org"
 }
 
-data "tfe_slug" "test" {
+data "tfe_slug" "training-policy-set" {
   source_path = "./policies/training-policy-set"
 }
 
-resource "tfe_policy_set" "test" {
+resource "tfe_policy_set" "training-policy-set" {
   name        = "training-policy-set"
   description = "https://hashicorp-terraform.awsworkshop.io/060_sentinel/6-policy-quickstart.html"
   # since tfe has it
   # organization = "artysf-org"
-  global = true
-  kind   = "sentinel"
+  workspace_ids = ["ws-JpWyndBw3tPSxg6H"]
+  kind          = "sentinel"
 
   // reference the tfe_slug data source.
-  slug = data.tfe_slug.test
+  slug = data.tfe_slug.training-policy-set
 }
 
 # working example
